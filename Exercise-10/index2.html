@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- question 2 -->
+    <h1 id="title">Text before DOM Manipulation</h1>
+
+    <input type="text" name="username" class="input-field" /><br /><br />
+
+    <label for="">
+      <input
+        type="radio"
+        name="gender"
+        value="Male"
+        checked="true"
+      />Male </label
+    ><br />
+    <label for="">
+      <input type="radio" name="gender" value="Female" />Female </label
+    ><br />
+
+    <p>para 1</p>
+    <p>para 2</p>
+    <p>para 3</p>
+    <p>para 4</p>
+
+    <ul>
+      <li>list 1</li>
+      <li>list 2</li>
+      <li>list 3</li>
+      <li>list 4</li>
+    </ul>
+
+    <p class="info">para 4, info class</p>
+    <p class="info">para 5, info class</p>
+
+    <label for="">
+      <input
+        type="checkbox"
+        name="hobby"
+        class="hobby"
+        value="chess"
+      />chess </label
+    ><br />
+    <label for="">
+      <input
+        type="checkbox"
+        name="hobby"
+        class="hobby"
+        value="programming"
+      />programming </label
+    ><br />
+    <label for="">
+      <input
+        type="checkbox"
+        name="hobby"
+        class="hobby"
+        value="movies"
+      />movies </label
+    ><br />
+
+    <br />
+    <button id="dom">Apply DOM Changes</button>
+
+    <script>
+      const dom = document.getElementById("dom");
+
+      dom.addEventListener("click", () => {
+        document.getElementById("title").textContent = "Updated Title";
+
+        document.getElementsByName("username")[0].value = "John Doe";
+
+        document.getElementsByName("gender").forEach((element) => {
+          console.log(element.value);
+        });
+
+        let count = 0;
+        Array.from(document.getElementsByTagName("p")).forEach((element) => {
+          count++;
+        });
+        const paraCount = document.createElement("p");
+        paraCount.textContent = `Number of paragraphs: ${count}`;
+
+        Array.from(document.querySelectorAll("ul li")).forEach((element) => {
+          console.log(element.textContent);
+        });
+
+        Array.from(document.getElementsByClassName("input-field")).forEach(
+          (element) => {
+            element.style.backgroundColor = "lightblue";
+          }
+        );
+
+        document.querySelector("p.info").textContent =
+          "This is the first info paragraph";
+
+        const gender = document.querySelector("[name='gender']:checked");
+        if (gender) {
+          const genderP = document.createElement("p");
+          genderP.innerHTML = `Selected Gender: ${gender.value}`;
+          document.body.appendChild(genderP);
+        }
+
+        document.querySelectorAll("p.info").forEach((element) => {
+          console.log(element.textContent);
+        });
+
+        document.querySelectorAll(".hobby").forEach((element) => {
+          element.checked = true;
+          const hobbyP = document.createElement("p");
+          hobbyP.innerHTML = element.value;
+          document.body.appendChild(hobbyP);
+        });
+      });
+    </script>
+  </body>
+</html>

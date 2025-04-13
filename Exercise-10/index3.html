@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <!-- question 3 -->
+  <style>
+    .outer {
+      background-color: rgb(158, 171, 144);
+      height: 500px;
+      width: 400px;
+      padding-left: 5px;
+      padding-right: 5px;
+      font-weight: 600;
+      font-family: Arial, Helvetica, sans-serif;
+      padding: 10px;
+    }
+
+    .title1 {
+      font-size: 20px;
+    }
+
+    .divider {
+      height: 1px;
+      width: 100%;
+      background-color: black;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    .upper {
+      margin-top: 10px;
+      padding-bottom: 10px;
+    }
+
+    .lower {
+      width: 80%;
+      padding-top: 10px;
+    }
+
+    .title2 {
+      font-size: 18px;
+    }
+
+    img {
+      height: 50px;
+    }
+
+    .fruit {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 5px;
+    }
+
+    span {
+      font-family: sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .bigInput {
+      border-radius: 10px;
+      width: 130px;
+      height: 20px;
+      border: none;
+      margin-right: 30px;
+      margin-top: 8px;
+    }
+
+    .smallInput {
+      border-radius: 10px;
+      width: 30px;
+      border: none;
+      margin-right: 0px;
+    }
+
+    .chbox {
+      height: 20px;
+      width: 20px;
+      border: none;
+      margin-right: 0;
+    }
+
+    .btnBox {
+      display: flex;
+      justify-content: center;
+      padding-top: 20px;
+    }
+
+    button {
+      background-color: rgb(171, 138, 85);
+      border: none;
+      border-radius: 10px;
+      padding: 5px;
+      padding-left: 50px;
+      padding-right: 50px;
+      color: white;
+    }
+  </style>
+  <body>
+    <!-- question 3 -->
+    <div class="outer box">
+      <center><span class="title1">Grocery Order Form</span></center>
+      <div class="upper">
+        <span>Customer Name</span><br />
+        <input type="text" class="bigInput" id="fname" />
+        <input type="text" class="bigInput" id="lname" />
+
+        <br /><br />
+        <span>Phone Number</span><br />
+        <input type="number" class="bigInput" id="number" />
+
+        <br /><br />
+        <span>Email</span><br />
+        <input type="email" class="bigInput" id="email" />
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="lower">
+        <span class="title2">Products</span><br />
+        <div class="fruit">
+          <img src="./apple.png" alt="" />
+          <input type="checkbox" name="fruit" class="chbox" id="apple" />
+          <span>Apple</span>
+          <span>$10</span>
+          <input type="number" class="smallInput" id="appleNum" />
+          <span>kg</span>
+        </div>
+
+        <div class="fruit">
+          <img src="./banana.png" alt="" />
+          <input type="checkbox" name="fruit" class="chbox" id="banana" />
+          <span>Banana</span>
+          <span>$5</span>
+          <input type="number" class="smallInput" id="bananaNum" />
+          <span>kg</span>
+        </div>
+
+        <div class="fruit">
+          <img src="./avacado.png" alt="" />
+          <input type="checkbox" name="fruit" class="chbox" id="avacado" />
+          <span>Avacado</span>
+          <span>$7</span>
+          <input type="number" class="smallInput" id="avacadoNum" />
+          <span>kg</span>
+        </div>
+      </div>
+
+      <div class="btnBox">
+        <a href="./recipt.html"><button id="submit">SUBMIT</button></a>
+      </div>
+    </div>
+
+    <script>
+      // question 3
+      const submitButton = document.getElementById("submit");
+
+      if (submitButton) {
+        submitButton.addEventListener("click", function (event) {
+          event.preventDefault();
+
+          const fname = document.getElementById("fname").value;
+          const lname = document.getElementById("lname").value;
+          const number = document.getElementById("number").value;
+          const email = document.getElementById("email").value;
+
+          const appleChecked = document.getElementById("apple").checked;
+          const bananaChecked = document.getElementById("banana").checked;
+          const avacadoChecked = document.getElementById("avacado").checked;
+
+          const appleQty = appleChecked
+            ? parseInt(document.getElementById("appleNum").value) || 0
+            : 0;
+          const bananaQty = bananaChecked
+            ? parseInt(document.getElementById("bananaNum").value) || 0
+            : 0;
+          const avacadoQty = avacadoChecked
+            ? parseInt(document.getElementById("avacadoNum").value) || 0
+            : 0;
+
+          const applePricePerKg = 10;
+          const bananaPricePerKg = 5;
+          const avacadoPricePerKg = 7;
+          const appleTotal = appleQty * applePricePerKg;
+          const bananaTotal = bananaQty * bananaPricePerKg;
+          const avacadoTotal = avacadoQty * avacadoPricePerKg;
+          const total = appleTotal + bananaTotal + avacadoTotal;
+
+          localStorage.setItem("customerName", `${fname} ${lname}`);
+          localStorage.setItem("customerNumber", number);
+          localStorage.setItem("customerEmail", email);
+          localStorage.setItem("appleQty", appleQty);
+          localStorage.setItem("bananaQty", bananaQty);
+          localStorage.setItem("avacadoQty", avacadoQty);
+          localStorage.setItem("appleTotal", appleTotal);
+          localStorage.setItem("bananaTotal", bananaTotal);
+          localStorage.setItem("avacadoTotal", avacadoTotal);
+          localStorage.setItem("total", total);
+
+          window.location.href = "recipt.html";
+        });
+      }
+
+      
+    </script>
+  </body>
+</html>

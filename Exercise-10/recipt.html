@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      .outer {
+        background-color: rgb(158, 171, 144);
+        height: 250px;
+        width: 400px;
+        padding-left: 5px;
+        padding-right: 5px;
+        font-family: Arial, Helvetica, sans-serif;
+        padding: 10px;
+      }
+
+      div{
+        margin-bottom: 5px;
+      }
+
+      .title1 {
+        text-align: center;
+        font-size: 25px;
+        font-weight: 600;
+      }
+
+      .divider {
+        height: 1px;
+        width: 100%;
+        background-color: black;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+
+      .title2 {
+        text-align: center;
+        font-size: 18px;
+        font-weight: 600;
+      }
+
+      .details, .fruit {
+        font-family: sans-serif;
+        font-size: 15px;
+      }
+
+      .total{
+        font-size: 18px;
+        font-weight: 600;
+        margin-top: 15px;
+      }
+    </style>
+</head>
+<body>
+    <div class="outer">
+        <center><div class="upper">
+            <div class="title1">Receipt</div>
+            <div class="name details">Name: </div>
+            <div class="number details">Number: </div>
+            <div class="email details">Email: </div>
+        </div>
+        <div class="divider"></div>
+        <div class="lower">
+            <div class="title2">Order Details</div>
+            <div class="apple fruit">Apples: </div>
+            <div class="banana fruit">Bananas: </div>
+            <div class="avacado fruit">Avacados: </div>
+            <div class="total">Total: </div>
+        </div></center>
+    </div>
+
+    <script>
+      if (window.location.pathname.includes("recipt.html")) {
+        document.querySelector(".name").textContent +=
+          localStorage.getItem("customerName") || "N/A";
+        document.querySelector(".number").textContent +=
+          localStorage.getItem("customerNumber") || "N/A";
+        document.querySelector(".email").textContent +=
+          localStorage.getItem("customerEmail") || "N/A";
+
+        document.querySelector(".apple").textContent +=
+          `${localStorage.getItem("appleQty")} kg ($10 * ${localStorage.getItem(
+            "appleQty"
+          )} = $${localStorage.getItem("appleTotal")})` || "0 kg";
+        document.querySelector(".banana").textContent +=
+          `${localStorage.getItem("bananaQty")} kg ($5 * ${localStorage.getItem(
+            "bananaQty"
+          )} = $${localStorage.getItem("bananaTotal")})` || "0 kg";
+        document.querySelector(".avacado").textContent +=
+          `${localStorage.getItem(
+            "avacadoQty"
+          )} kg ($7 * ${localStorage.getItem(
+            "avacadoQty"
+          )} = $${localStorage.getItem("avacadoTotal")})` || "0 kg";
+        document.querySelector(".total").textContent +=
+          "$" + (localStorage.getItem("total") || 0);
+      }
+    </script>
+</body>
+</html>

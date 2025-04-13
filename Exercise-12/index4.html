@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>23BCE1489</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                text-align: center;
+                background-color: #f4f4f4;
+            }
+            .container {
+                position: relative;
+                width: 400px;
+                height: 400px;
+                margin: auto;
+                overflow: hidden;
+            }
+            .box {
+                position: absolute;
+                width: 150px;
+                height: 150px;
+                text-align: center;
+                line-height: 150px;
+                font-weight: bold;
+                color: white;
+                border: 2px solid black;
+                cursor: pointer;
+            }
+            #box1 {
+                background: red;
+                top: 50px;
+                left: 50px;
+            }
+            #box2 {
+                background: blue;
+                top: 100px;
+                left: 100px;
+            }
+            #box3 {
+                background: green;
+                top: 150px;
+                left: 150px;
+            }
+            .controls {
+                margin-top: 20px;
+            }
+            .controls button {
+                margin: 5px;
+                padding: 8px 15px;
+                font-size: 14px;
+                cursor: pointer;
+            }
+            .z-index-info {
+                margin-top: 10px;
+                font-size: 16px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div id="box1" class="box">Box 1</div>
+            <div id="box2" class="box">Box 2</div>
+            <div id="box3" class="box">Box 3</div>
+        </div>
+
+        <div class="controls">
+            <label for="boxSelect">Select Box:</label>
+            <select id="boxSelect">
+                <option value="box1">Box 1</option>
+                <option value="box2">Box 2</option>
+                <option value="box3">Box 3</option>
+            </select>
+            <button onclick="moveUp()">Move Up</button>
+            <button onclick="moveDown()">Move Down</button>
+        </div>
+
+        <div class="z-index-info">
+            <p id="zIndexDisplay"></p>
+        </div>
+
+        <script>
+            let boxes = document.querySelectorAll(".box");
+            let zIndexMap = { box1: 1, box2: 2, box3: 3 };
+
+            function moveUp() {
+                let selectedId = document.getElementById("boxSelect").value;
+                zIndexMap[selectedId] += 1;
+                document.getElementById(selectedId).style.zIndex = zIndexMap[selectedId];
+                updateZIndexDisplay();
+            }
+
+            function moveDown() {
+                let selectedId = document.getElementById("boxSelect").value;
+                if (zIndexMap[selectedId] > 1) {
+                    zIndexMap[selectedId] -= 1;
+                    document.getElementById(selectedId).style.zIndex = zIndexMap[selectedId];
+                    updateZIndexDisplay();
+                }
+            }
+
+            function updateZIndexDisplay() {
+                document.getElementById("zIndexDisplay").innerText =
+                    `Box 1: ${zIndexMap.box1}, Box 2: ${zIndexMap.box2}, Box 3: ${zIndexMap.box3}`;
+            }
+
+            boxes.forEach((box) => {
+                box.style.zIndex = zIndexMap[box.id];
+            });
+            updateZIndexDisplay();
+        </script>
+    </body>
+</html>
